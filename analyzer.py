@@ -1,3 +1,5 @@
+import uuid
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -6,7 +8,7 @@ class PPAAnalyzer:
     def __init__(self):
         pass
 
-    def analyze(self, buffer: list, sample_rate: float):
+    def analyze(self, buffer: list, sample_rate: float) -> str:
         signal_arr = np.array(buffer, dtype=np.float64)
 
         fft_result = np.fft.fft(signal_arr)
@@ -20,4 +22,6 @@ class PPAAnalyzer:
         plt.xlabel('Frequenz (Hz)')
         plt.ylabel('Amplitude (dB)')
         plt.grid(True)
-        plt.show()
+        filename = str(uuid.uuid4()) + ".png"
+        plt.savefig(filename)
+        return filename
