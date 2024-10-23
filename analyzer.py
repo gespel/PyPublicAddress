@@ -19,7 +19,7 @@ class PPAAnalyzer:
         fft_result = np.fft.fft(signal_arr)
         fft_abs = np.abs(fft_result)
         frequencies = np.fft.fftfreq(len(buffer), d=1/sample_rate)
-        print(len(frequencies))
+        #print(len(frequencies))
 
         plt.figure(figsize=(12, 6))
         plt.plot(frequencies[:len(buffer) // 2], 20 * np.log(fft_abs[:len(buffer) // 2]/fft_abs.max()))
