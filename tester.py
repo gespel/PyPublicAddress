@@ -3,6 +3,7 @@ from copy import deepcopy
 
 import analyzer
 import signal_generator
+from devices.dcx2496 import DCX2496
 
 SAMPLERATE = 48000
 
@@ -18,7 +19,8 @@ for i in range(0, len(test_signal)):
 
 
 
-ppa.analyze(test_signal, SAMPLERATE)
-
+#ppa.analyze(test_signal, SAMPLERATE)
+d = DCX2496("1", b"\x01")
+d.send_serial(b"\x20",b"\x01\x01\x02\x01\x52")
 
 
