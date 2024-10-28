@@ -1,8 +1,7 @@
 from fastapi import FastAPI
-from fastapi.openapi.models import Response
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse, FileResponse
-from analyzer import PPAAnalyzer
+from lib.analyzer import PPAAnalyzer
 
 
 class RenderRequest(BaseModel):
@@ -24,6 +23,5 @@ def root_get():
 @app.post("/")
 def root(render_request: RenderRequest):
     a = PPAAnalyzer()
-    fn = a.analyze(buffer=render_request.buffer, sample_rate=render_request.sample_rate)
+    fn = a.render_fft(buffer=render_request.buffer, sample_rate=render_request.sample_rate)
     return FileResponse(fn, media_type="image/png")
-    #return {"fn": fn}

@@ -1,8 +1,7 @@
 import random
 from copy import deepcopy
 
-import analyzer
-import signal_generator
+from lib import analyzer, signal_generator
 from devices.dcx2496 import DCX2496
 
 SAMPLERATE = 48000

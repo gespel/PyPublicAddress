@@ -6,13 +6,14 @@ import numpy as np
 
 
 class PPAAnalyzer:
-    def __init__(self):
+    def __init__(self, render_folder: str = "renders"):
         logging.basicConfig(level=logging.INFO)
         logging.info('Starting PPAAnalyzer...')
-        if not os.path.isdir("renders"):
-            os.mkdir("renders")
+        if not os.path.isdir(render_folder):
+            os.mkdir(render_folder)
+            self.render_folder = render_folder
 
-    def analyze(self, buffer: list, sample_rate: float) -> str:
+    def render_fft(self, buffer: list, sample_rate: float) -> str:
         logging.info("Analyzing...")
         signal_arr = np.array(buffer, dtype=np.float64)
 
@@ -27,7 +28,7 @@ class PPAAnalyzer:
         plt.xlabel('Frequenz (Hz)')
         plt.ylabel('Amplitude (dB)')
         plt.grid(True)
-        filename = os.path.join("renders", str(uuid.uuid4()) + ".png")
+        filename = os.path.join(self.render_folder, str(uuid.uuid4()) + ".png")
         plt.savefig(filename)
         logging.info('Saved analysis results to {}'.format(filename))
         return filename
